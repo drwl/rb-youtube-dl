@@ -78,7 +78,8 @@ module YoutubeDL
       {
         color: false,
         progress: false,
-        print_json: true
+# Suppresses output from -F option
+#        print_json: true
       }
     end
 
