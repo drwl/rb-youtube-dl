@@ -77,7 +77,7 @@ module YoutubeDL
     def default_options
       {
         color: false,
-        progress: false,
+        progress: false
 # Suppresses output from -F option
 #        print_json: true
       }
