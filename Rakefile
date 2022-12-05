@@ -1,5 +1,6 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
+require 'erb'
 
 Rake::TestTask.new do |t|
   t.pattern = 'test/**/*_test.rb'
@@ -33,7 +34,7 @@ namespace :binaries do
     version = `./vendor/bin/youtube-dl --version`.strip
     version_filename = './lib/youtube-dl/version.rb'
 
-    # Compliled template file
+    # Compiled template file
     version_file = ERB.new(data).result(binding)
 
     # Syntax Check. Throws a SyntaxError if it doesn't work.
