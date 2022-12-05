@@ -32,19 +32,19 @@ module YoutubeDL
       @executable_path ||= usable_executable_path_for(@executable)
     end
 
-    # Returns Cocaine's runner engine
+    # Returns Terrapin's runner engine
     #
     # @return [CommandLineRunner] backend runner class
     def backend_runner
-      Cocaine::CommandLine.runner
+      Terrapin::CommandLine.runner
     end
 
-    # Sets Cocaine's runner engine
+    # Sets Terrapin's runner engine
     #
-    # @param cocaine_runner [CommandLineRunner] backend runner class
-    # @return [Object] whatever Cocaine::CommandLine.runner= returns.
-    def backend_runner=(cocaine_runner)
-      Cocaine::CommandLine.runner = cocaine_runner
+    # @param terrapin_runner [CommandLineRunner] backend runner class
+    # @return [Object] whatever Terrapin::CommandLine.runner= returns.
+    def backend_runner=(terrapin_runner)
+      Terrapin::CommandLine.runner = terrapin_runner
     end
 
     # Returns the command string without running anything
@@ -75,7 +75,7 @@ module YoutubeDL
 
     private
 
-    # Parses options and converts them to Cocaine's syntax
+    # Parses options and converts them to Terrapin's syntax
     #
     # @return [String] commands ready to do cocaine
     def options_to_commands
