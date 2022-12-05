@@ -36,7 +36,9 @@ module YoutubeDL
       raise ArgumentError.new('url cannot be nil') if @url.nil?
       raise ArgumentError.new('url cannot be empty') if @url.empty?
 
-      set_information_from_json(YoutubeDL::Runner.new(url, runner_options).run)
+      YoutubeDL::Runner.new(url, runner_options).run
+
+      # set_information_from_json(YoutubeDL::Runner.new(url, runner_options).run)
     end
 
     alias_method :get, :download
@@ -77,9 +79,8 @@ module YoutubeDL
     def default_options
       {
         color: false,
-        progress: false
-# Suppresses output from -F option
-#        print_json: true
+        progress: false,
+        print_json: true
       }
     end
 
