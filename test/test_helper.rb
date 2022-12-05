@@ -21,9 +21,6 @@ def remove_downloaded_files
   Dir.glob("**/*nope*").each do |nope|
     File.delete(nope)
   end
-end
 
-def travis_ci?
-  !!ENV['TRAVIS']
+  Rake::Task['utilities:clear_cache'].invoke
 end
-Bundler.require(:extras) if defined?(Bundler) && !travis_ci?
