@@ -51,7 +51,7 @@ module YoutubeDL
     #
     # @return [String] command line string
     def to_command
-      cocaine_line(options_to_commands).command(@options.store)
+      terrapin_line(options_to_commands).command(@options.store)
     end
     alias_method :command, :to_command
 
@@ -59,7 +59,7 @@ module YoutubeDL
     #
     # @return [String] the output of youtube-dl
     def run
-      cocaine_line(options_to_commands).run(@options.store)
+      terrapin_line(options_to_commands).run(@options.store)
     end
     alias_method :download, :run
 
@@ -77,7 +77,7 @@ module YoutubeDL
 
     # Parses options and converts them to Terrapin's syntax
     #
-    # @return [String] commands ready to do cocaine
+    # @return [String] commands ready to do terrapin
     def options_to_commands
       commands = []
       @options.sanitize_keys.each_paramized_key do |key, paramized_key|
