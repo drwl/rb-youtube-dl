@@ -2,11 +2,8 @@ require_relative '../test_helper'
 
 describe YoutubeDL::Runner do
   before do
-    @runner = YoutubeDL::Runner.new(TEST_URL)
-  end
-
-  before do
     clear_youtube_dl_cache
+    @runner = YoutubeDL::Runner.new(TEST_URL)
   end
 
   after do
