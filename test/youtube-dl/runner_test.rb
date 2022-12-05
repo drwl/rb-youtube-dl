@@ -5,6 +5,10 @@ describe YoutubeDL::Runner do
     @runner = YoutubeDL::Runner.new(TEST_URL)
   end
 
+  before do
+    clear_youtube_dl_cache
+  end
+
   after do
     remove_downloaded_files
   end

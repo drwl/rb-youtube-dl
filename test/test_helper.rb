@@ -7,6 +7,7 @@ require 'purdytest' # minitest-colorize is broken in minitest version 5
 require 'fileutils'
 require 'yaml'
 require 'bundler/setup'
+require 'rake'
 
 require 'youtube-dl'
 
@@ -17,10 +18,16 @@ TEST_FILENAME = "nope.avi.mp4"
 TEST_FORMAT = "18"
 TEST_GLOB = "nope*"
 
+load 'Rakefile'
+
+def clear_youtube_dl_cache
+  Rake::Task['utilities:clear_cache'].invoke
+end
+
 def remove_downloaded_files
   Dir.glob("**/*nope*").each do |nope|
     File.delete(nope)
   end
-
-  Rake::Task['utilities:clear_cache'].invoke
 end
+
+Bundler.require(:extras) if defined?(Bundler)

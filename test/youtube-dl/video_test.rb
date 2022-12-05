@@ -2,6 +2,7 @@ require_relative '../test_helper'
 
 describe YoutubeDL::Video do
   before do
+    clear_youtube_dl_cache
     @video = YoutubeDL::Video.new TEST_URL
   end
 

@@ -14,6 +14,10 @@ describe YoutubeDL do
   end
 
   describe '.download' do
+    before do
+      clear_youtube_dl_cache
+    end
+
     after do
       remove_downloaded_files
     end
@@ -40,6 +44,10 @@ describe YoutubeDL do
   end
 
   describe '.get' do
+    before do
+      clear_youtube_dl_cache
+    end
+
     after do
       remove_downloaded_files
     end
