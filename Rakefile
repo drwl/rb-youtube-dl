@@ -8,6 +8,13 @@ end
 
 task default: [:test]
 
+namespace :utilities do
+  desc 'Clear youtube-dl cache directory'
+  task :clear_cache do
+    system("./vendor/bin/youtube-dl --rm-cache-dir")
+  end
+end
+
 namespace :binaries do
   def get_binaries(version)
     puts 'Updating python script'
