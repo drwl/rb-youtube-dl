@@ -14,6 +14,10 @@ describe YoutubeDL do
   end
 
   describe '.download' do
+    before do
+      clear_youtube_dl_cache
+    end
+
     after do
       remove_downloaded_files
     end
@@ -40,6 +44,10 @@ describe YoutubeDL do
   end
 
   describe '.get' do
+    before do
+      clear_youtube_dl_cache
+    end
+
     after do
       remove_downloaded_files
     end
@@ -60,7 +68,7 @@ describe YoutubeDL do
     end
 
     it 'should include the youtube extractors' do
-      ['youtube', 'youtube:channel', 'youtube:search', 'youtube:show', 'youtube:user', 'youtube:playlist'].each do |e|
+      ["youtube", "youtube:favorites", "youtube:history", "youtube:playlist", "youtube:recommended", "youtube:search", "youtube:search:date", "youtube:subscriptions", "youtube:tab", "youtube:truncated_id", "youtube:truncated_url", "youtube:watchlater", "YoutubeYtBe", "YoutubeYtUser"].each do |e|
         assert_includes @extractors, e
       end
     end
@@ -90,7 +98,7 @@ describe YoutubeDL do
     end
 
     it 'should be a specific format with no newlines' do
-      assert_match /Mozilla\/5\.0\s.*\)\z/, @user_agent
+      assert_match /Mozilla\/5\.0\s.*\).*\z/, @user_agent
     end
   end
 end

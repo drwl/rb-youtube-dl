@@ -1,11 +1,19 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
+require 'erb'
 
 Rake::TestTask.new do |t|
   t.pattern = 'test/**/*_test.rb'
 end
 
 task default: [:test]
+
+namespace :utilities do
+  desc 'Clear youtube-dl cache directory'
+  task :clear_cache do
+    system("./vendor/bin/youtube-dl --rm-cache-dir")
+  end
+end
 
 namespace :binaries do
   def get_binaries(version)
@@ -33,7 +41,7 @@ namespace :binaries do
     version = `./vendor/bin/youtube-dl --version`.strip
     version_filename = './lib/youtube-dl/version.rb'
 
-    # Compliled template file
+    # Compiled template file
     version_file = ERB.new(data).result(binding)
 
     # Syntax Check. Throws a SyntaxError if it doesn't work.
@@ -64,5 +72,5 @@ __END__
 module YoutubeDL
   # Semantic Version as well as the bundled binary version.
   # "(major).(minor).(teeny).(pre-release).(binary-version)"
-  VERSION = '0.3.1.<%= version %>'.freeze
+  VERSION = '0.4.0.<%= version %>'.freeze
 end
