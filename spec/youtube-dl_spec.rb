@@ -3,11 +3,13 @@ RSpec.describe YoutubeDL do
     let(:version) { YoutubeDL::VERSION }
 
     it 'is a valid Rubygem version' do
-      assert Gem::Version.correct?(version), "Malformed version number string #{version}"
+      # "Malformed version number string #{version}"
+      expect(Gem::Version.correct?(version)).to be_truthy
     end
 
     it 'is the correct format' do
-      assert_match(/\d+.\d+.\d+.\d{4}\.\d+\.\d+\.?\d+?/, version)
+      version_matcher = /\d+.\d+.\d+.\d{4}\.\d+\.\d+\.?\d+?/
+      expect(version).to match(version_matcher)
     end
   end
 
@@ -21,23 +23,23 @@ RSpec.describe YoutubeDL do
     end
 
     it 'should download videos without options' do
-      YoutubeDL.download TEST_URL
-      assert_equal 1, Dir.glob(TEST_GLOB).length
+      YoutubeDL.download default_test_url
+      expect(Dir.glob(default_test_glob).length).to eq(1)
     end
 
     it 'should download videos with options' do
-      YoutubeDL.download TEST_URL, output: TEST_FILENAME, format: TEST_FORMAT
-      assert File.exist? TEST_FILENAME
+      YoutubeDL.download default_test_url, output: default_test_filename, format: default_test_format
+      expect(File.exist?(default_test_filename)).to be_truthy
     end
 
     it 'should download multiple videos without options' do
-      YoutubeDL.download [TEST_URL, TEST_URL2]
-      assert_equal 2, Dir.glob(TEST_GLOB).length
+      YoutubeDL.download [default_test_url, default_test_url2]
+      expect(Dir.glob(default_test_glob).length).to eq(2)
     end
 
     it 'should download multiple videos with options' do
-      YoutubeDL.download [TEST_URL, TEST_URL2], output: 'test_%(title)s-%(id)s.%(ext)s'
-      assert_equal 2, Dir.glob('test_' + TEST_GLOB).length
+      YoutubeDL.download [default_test_url, default_test_url2], output: 'test_%(title)s-%(id)s.%(ext)s'
+      expect(Dir.glob('test_' + default_test_glob).length).to eq(2)
     end
   end
 
@@ -51,8 +53,8 @@ RSpec.describe YoutubeDL do
     end
 
     it 'should download videos, exactly like .download' do
-      YoutubeDL.get TEST_URL
-      assert_equal Dir.glob(TEST_GLOB).length, 1
+      YoutubeDL.get default_test_url
+      expect(Dir.glob(default_test_glob).length).to eq(1)
     end
   end
 
@@ -62,13 +64,12 @@ RSpec.describe YoutubeDL do
     end
 
     it 'should return an Array' do
-      assert_instance_of Array, @extractors
+      expect(@extractors).to be_a(Array)
     end
 
     it 'should include the youtube extractors' do
-      ["youtube", "youtube:favorites", "youtube:history", "youtube:playlist", "youtube:recommended", "youtube:search", "youtube:search:date", "youtube:subscriptions", "youtube:tab", "youtube:truncated_id", "youtube:truncated_url", "youtube:watchlater", "YoutubeYtBe", "YoutubeYtUser"].each do |e|
-        assert_includes @extractors, e
-      end
+      expected_youtube_extractors = ["youtube", "youtube:favorites", "youtube:history", "youtube:playlist", "youtube:recommended", "youtube:search", "youtube:search:date", "youtube:subscriptions", "youtube:tab", "youtube:truncated_id", "youtube:truncated_url", "youtube:watchlater", "YoutubeYtBe", "YoutubeYtUser"]
+      expect(@extractors).to include(*expected_youtube_extractors)
     end
   end
 
@@ -78,11 +79,12 @@ RSpec.describe YoutubeDL do
     end
 
     it 'should return a string' do
-      assert_instance_of String, @version
+      expect(@version).to be_a(String)
     end
 
     it 'should be a specific format with no newlines' do
-      assert_match /\d+.\d+.\d+\z/, @version
+      version_matcher = /\d+.\d+.\d+\z/
+      expect(@version).to match(version_matcher)
     end
   end
 
@@ -92,11 +94,12 @@ RSpec.describe YoutubeDL do
     end
 
     it 'should return a string' do
-      assert_instance_of String, @user_agent
+      expect(@user_agent).to be_a(String)
     end
 
     it 'should be a specific format with no newlines' do
-      assert_match /Mozilla\/5\.0\s.*\).*\z/, @user_agent
+      user_agent_matcher = /Mozilla\/5\.0\s.*\).*\z/
+      expect(@user_agent).to match(user_agent_matcher)
     end
   end
 end
