@@ -9,7 +9,7 @@ RSpec.describe YoutubeDL::Runner do
   end
 
   describe '#initialize' do
-    it 'should take options as a hash yet still have configuration blocks work' do
+    it 'should take options as a hash yet still have configuration blocks work', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       r = YoutubeDL::Runner.new(default_test_url, { some_key: 'some value' })
       r.options.configure do |c|
         c.another_key = 'another_value'
@@ -22,19 +22,19 @@ RSpec.describe YoutubeDL::Runner do
   end
 
   describe '#executable_path' do
-    it 'should set executable path automatically' do
+    it 'should set executable path automatically', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       matcher = /youtube-dl/
       expect(matcher).to match(@runner.executable_path)
     end
 
-    it 'should not have a newline char in the executable_path' do
+    it 'should not have a newline char in the executable_path', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       matcher = /youtube-dl\z/
       expect(matcher).to match(@runner.executable_path)
     end
   end
 
   describe '#backend_runner=, #backend_runner' do
-    it 'should set terrapin runner' do
+    it 'should set terrapin runner', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @runner.backend_runner = Terrapin::CommandLine::BackticksRunner.new
       expect(@runner.backend_runner).to be_a(Terrapin::CommandLine::BackticksRunner)
 
@@ -44,27 +44,27 @@ RSpec.describe YoutubeDL::Runner do
   end
 
   describe '#to_command' do
-    it 'should parse key-values from options' do
+    it 'should parse key-values from options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @runner.options.some_key = "a value"
 
       expect(@runner.to_command.match(/--some-key\s.*a value.*/)).to_not be_nil
     end
 
-    it 'should handle true boolean values' do
+    it 'should handle true boolean values', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @runner.options.truthy_value = true
 
       matcher = /youtube-dl .*--truthy-value\s--|\"http.*/
       expect(matcher).to match(@runner.to_command)
     end
 
-    it 'should handle false boolean values' do
+    it 'should handle false boolean values', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @runner.options.false_value = false
 
       matcher = /youtube-dl .*--no-false-value\s--|\"http.*/
       expect(matcher).to match(@runner.to_command)
     end
 
-    it 'should not have newline char in to_command' do
+    it 'should not have newline char in to_command', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       matcher = /youtube-dl\s/
 
       expect(matcher).to match(@runner.to_command)
@@ -72,7 +72,7 @@ RSpec.describe YoutubeDL::Runner do
   end
 
   describe '#run' do
-    it 'should run commands' do
+    it 'should run commands', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @runner.options.output = default_test_filename
       @runner.options.format = default_test_format
       @runner.run
@@ -81,7 +81,7 @@ RSpec.describe YoutubeDL::Runner do
   end
 
   describe '#configure' do
-    it 'should update configuration options' do
+    it 'should update configuration options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @runner.configure do |c|
         c.output = default_test_filename
       end

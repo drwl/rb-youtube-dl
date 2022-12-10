@@ -22,22 +22,22 @@ RSpec.describe YoutubeDL do
       remove_downloaded_files
     end
 
-    it 'should download videos without options' do
+    it 'should download videos without options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL.download default_test_url
       expect(Dir.glob(default_test_glob).length).to eq(1)
     end
 
-    it 'should download videos with options' do
+    it 'should download videos with options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL.download default_test_url, output: default_test_filename, format: default_test_format
       expect(File.exist?(default_test_filename)).to be_truthy
     end
 
-    it 'should download multiple videos without options' do
+    it 'should download multiple videos without options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL.download [default_test_url, default_test_url2]
       expect(Dir.glob(default_test_glob).length).to eq(2)
     end
 
-    it 'should download multiple videos with options' do
+    it 'should download multiple videos with options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL.download [default_test_url, default_test_url2], output: 'test_%(title)s-%(id)s.%(ext)s'
       expect(Dir.glob('test_' + default_test_glob).length).to eq(2)
     end
@@ -52,7 +52,7 @@ RSpec.describe YoutubeDL do
       remove_downloaded_files
     end
 
-    it 'should download videos, exactly like .download' do
+    it 'should download videos, exactly like .download', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL.get default_test_url
       expect(Dir.glob(default_test_glob).length).to eq(1)
     end

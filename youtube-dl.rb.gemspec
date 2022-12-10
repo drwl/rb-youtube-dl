@@ -21,7 +21,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'terrapin', '>= 0.6.0'
 
   spec.add_development_dependency 'bundler', '>= 1.6'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'purdytest'
+  spec.add_development_dependency 'rspec-retry'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'pry-byebug'
 end

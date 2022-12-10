@@ -9,24 +9,24 @@ RSpec.describe YoutubeDL::Video do
   end
 
   describe '.download' do
-    it 'should download videos without options' do
+    it 'should download videos without options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL::Video.download default_test_url, format: default_test_format
       expect(Dir.glob(default_test_glob).length).to eq(1)
     end
 
-    it 'should download videos with options' do
+    it 'should download videos with options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL::Video.download default_test_url, output: default_test_filename, format: default_test_format
       expect(File.exist?(default_test_filename)).to be_truthy
     end
 
-    it 'should return an instance of YoutubeDL::Video' do
+    it 'should return an instance of YoutubeDL::Video', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       video = YoutubeDL::Video.download default_test_url, format: default_test_format
       expect(video).to be_a(YoutubeDL::Video)
     end
   end
 
   describe '.get' do
-    it 'should download videos, exactly like .download' do
+    it 'should download videos, exactly like .download', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       YoutubeDL::Video.get default_test_url, format: default_test_format
       expect(Dir.glob(default_test_glob).length).to eq(1)
     end
@@ -43,22 +43,22 @@ RSpec.describe YoutubeDL::Video do
   end
 
   describe '#download' do
-    it 'should download the file' do
+    it 'should download the file', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       expect(Dir.glob(default_test_glob).length).to eq(0)
       @video.download
       expect(Dir.glob(default_test_glob).length).to eq(1)
     end
 
-    it 'should set model variables accordingly' do
+    it 'should set model variables accordingly', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @video.download
       expect(Dir.glob(default_test_glob).first).to eq(@video.filename)
     end
 
-    it 'should raise ArgumentError if url is nil' do
+    it 'should raise ArgumentError if url is nil', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       expect { YoutubeDL::Video.new(nil).download }.to raise_error(ArgumentError)
     end
 
-    it 'should raise ArgumentError if url is empty' do
+    it 'should raise ArgumentError if url is empty', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       expect { YoutubeDL::Video.new('').download }.to raise_error(ArgumentError)
     end
   end
@@ -70,25 +70,25 @@ RSpec.describe YoutubeDL::Video do
       end
     end
 
-    it 'should be able to get the filename from the output' do
+    it 'should be able to get the filename from the output', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       @video.download
       expect(@video.filename).to eq(default_test_filename)
     end
 
-    it 'should be able to be predicted' do
+    it 'should be able to be predicted', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       predicted_filename = @video.information[:_filename]
       @video.download
       expect(@video.filename).to eq(predicted_filename)
     end
 
-    it 'should return predicted filename before download' do
+    it 'should return predicted filename before download', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       predicted_filename = @video.filename
       expect(@video.information[:_filename]).to eq(predicted_filename) # Sanity check
       @video.download
       expect(@video.filename).to eq(predicted_filename)
     end
 
-    it 'should not return previously predicted filename after editing the options' do
+    it 'should not return previously predicted filename after editing the options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       predicted_filename = @video.filename
       @video.configure do |c|
         c.output = "#{default_test_filename}.2"
@@ -101,7 +101,7 @@ RSpec.describe YoutubeDL::Video do
     # In older versions it parsed the command output looking for the filename,
     # But in more recent versions it gets the information from --print-json therefore
     # youtube-dl is at fault for not returning the correct filename.
-    it 'should give the correct filename when run through ffmpeg' do
+    it 'should give the correct filename when run through ffmpeg', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       skip #if travis_ci?
       @video.configure do |c|
         c.output = 'nope-%(id)s.%(ext)s'
@@ -127,7 +127,7 @@ RSpec.describe YoutubeDL::Video do
       expect(@information).not_to be_empty
     end
 
-    it 'does not output to stdout when get_filename is true' do
+    it 'does not output to stdout when get_filename is true', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       skip
 
       @video.options.get_filename = true
@@ -136,7 +136,7 @@ RSpec.describe YoutubeDL::Video do
       expect { @video.download }.to_not output.to_stdout
     end
 
-    it 'does not output to stderr when get_filename is true' do
+    it 'does not output to stderr when get_filename is true', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
       skip
 
       @video.options.get_filename = true
