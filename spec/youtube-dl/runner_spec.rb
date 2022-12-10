@@ -10,7 +10,7 @@ RSpec.describe YoutubeDL::Runner do
 
   describe '#initialize' do
     it 'should take options as a hash yet still have configuration blocks work' do
-      r = YoutubeDL::Runner.new(default_test_url, {some_key: 'some value'})
+      r = YoutubeDL::Runner.new(default_test_url, { some_key: 'some value' })
       r.options.configure do |c|
         c.another_key = 'another_value'
       end
