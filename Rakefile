@@ -1,12 +1,9 @@
 require 'bundler/gem_tasks'
-require 'rake/testtask'
 require 'erb'
 
-Rake::TestTask.new do |t|
-  t.pattern = 'test/**/*_test.rb'
-end
-
-task default: [:test]
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+task default: :spec
 
 namespace :utilities do
   desc 'Clear youtube-dl cache directory'
