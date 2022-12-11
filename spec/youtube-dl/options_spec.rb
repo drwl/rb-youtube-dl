@@ -1,9 +1,9 @@
-RSpec.describe YoutubeDL::Options do
+RSpec.describe RbYoutubeDL::Options do
   let(:example_pair) { { parent_key: 'parent value' } }
   let(:banned_pair) { { banned_key: 'Outlaw Country! Whoo!' } }
 
   before do
-    @options = YoutubeDL::Options.new
+    @options = RbYoutubeDL::Options.new
     @options.banned_keys.push :banned_key
   end
 
@@ -16,15 +16,15 @@ RSpec.describe YoutubeDL::Options do
     end
 
     it 'should accept a parent Options as a param' do
-      parent = YoutubeDL::Options.new(parent_key: 'parent value')
-      child = YoutubeDL::Options.new(parent)
+      parent = RbYoutubeDL::Options.new(parent_key: 'parent value')
+      child = RbYoutubeDL::Options.new(parent)
 
       expect(parent.store).to eq(child.store)
     end
 
     it 'should accept a Hash as a param' do
       hash = { parent_key: 'parent value' }
-      options = YoutubeDL::Options.new(hash)
+      options = RbYoutubeDL::Options.new(hash)
 
       expect(options.store).to eq(hash)
     end
@@ -85,7 +85,7 @@ RSpec.describe YoutubeDL::Options do
     end
 
     it 'should not override parent configuration' do
-      opts = YoutubeDL::Options.new(parent: 'value')
+      opts = RbYoutubeDL::Options.new(parent: 'value')
       opts.configure do |c|
         c.child = 'vlaue'
       end
@@ -211,7 +211,7 @@ RSpec.describe YoutubeDL::Options do
     it 'should return instance of Options when calling sanitize_keys' do
       @options.store['some-key'] = "some_value"
 
-      expect(@options.sanitize_keys).to be_a(YoutubeDL::Options)
+      expect(@options.sanitize_keys).to be_a(RbYoutubeDL::Options)
     end
   end
 

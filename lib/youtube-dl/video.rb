@@ -1,15 +1,15 @@
-module YoutubeDL
+module RbYoutubeDL
   # Video model for using and downloading a single video.
   class Video < Runner
     class << self
       # Instantiate a new Video model and download the video
       #
-      #   YoutubeDL.download 'https://www.youtube.com/watch?v=KLRDLIIl8bA' # => #<YoutubeDL::Video:0x00000000000000>
-      #   YoutubeDL.get 'https://www.youtube.com/watch?v=ia1diPnNBgU', extract_audio: true, audio_quality: 0
+      #   RbYoutubeDL.download 'https://www.youtube.com/watch?v=KLRDLIIl8bA' # => #<RbYoutubeDL::Video:0x00000000000000>
+      #   RbYoutubeDL.get 'https://www.youtube.com/watch?v=ia1diPnNBgU', extract_audio: true, audio_quality: 0
       #
       # @param url [String] URL to use and download
       # @param options [Hash] Options to pass in
-      # @return [YoutubeDL::Video] new Video model
+      # @return [RbYoutubeDL::Video] new Video model
       def download(url, options = {})
         video = new(url, options)
         video.download
@@ -18,7 +18,7 @@ module YoutubeDL
       alias_method :get, :download
     end
 
-    # @return [YoutubeDL::Options] Download Options for the last download
+    # @return [RbYoutubeDL::Options] Download Options for the last download
     attr_reader :download_options
 
     # Instantiate new model
@@ -27,7 +27,7 @@ module YoutubeDL
     # @param options [Hash] Options to populate the everything with
     def initialize(url, options = {})
       @url = url
-      @options = YoutubeDL::Options.new(options.merge(default_options))
+      @options = RbYoutubeDL::Options.new(options.merge(default_options))
       @options.banned_keys = banned_keys
     end
 
@@ -36,7 +36,7 @@ module YoutubeDL
       raise ArgumentError.new('url cannot be nil') if @url.nil?
       raise ArgumentError.new('url cannot be empty') if @url.empty?
 
-      set_information_from_json(YoutubeDL::Runner.new(url, runner_options).run)
+      set_information_from_json(RbYoutubeDL::Runner.new(url, runner_options).run)
     end
 
     alias_method :get, :download
@@ -96,7 +96,7 @@ module YoutubeDL
     end
 
     def runner_options
-      YoutubeDL::Options.new(@options.to_h.merge(default_options))
+      RbYoutubeDL::Options.new(@options.to_h.merge(default_options))
     end
 
     def set_information_from_json(json) # :nodoc:
@@ -104,7 +104,7 @@ module YoutubeDL
     end
 
     def grab_information_without_download # :nodoc:
-      set_information_from_json(YoutubeDL::Runner.new(url, runner_options.with({skip_download: true})).run)
+      set_information_from_json(RbYoutubeDL::Runner.new(url, runner_options.with({ skip_download: true})).run)
     end
   end
 end

@@ -50,7 +50,7 @@ namespace :binaries do
 
     # Checks new version string to make sure it's not malformed
     load version_filename
-    Gem::Version.new(YoutubeDL::VERSION)
+    Gem::Version.new(RbYoutubeDL::VERSION)
 
     abort unless system("git commit -a -m 'Updated binaries to #{version}'")
 
@@ -66,7 +66,7 @@ __END__
 # If you are updating this code, make sure you are updating
 # lib/youtube-dl/version.rb as well as the Rakefile.
 
-module YoutubeDL
+module RbYoutubeDL
   # Semantic Version as well as the bundled binary version.
   # "(major).(minor).(teeny).(pre-release).(binary-version)"
   VERSION = '0.4.0.<%= version %>'.freeze

@@ -1,7 +1,7 @@
-RSpec.describe YoutubeDL::Runner do
+RSpec.describe RbYoutubeDL::Runner do
   before do
     clear_youtube_dl_cache
-    @runner = YoutubeDL::Runner.new(default_test_url)
+    @runner = RbYoutubeDL::Runner.new(default_test_url)
   end
 
   after do
@@ -10,7 +10,7 @@ RSpec.describe YoutubeDL::Runner do
 
   describe '#initialize' do
     it 'should take options as a hash yet still have configuration blocks work', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
-      r = YoutubeDL::Runner.new(default_test_url, { some_key: 'some value' })
+      r = RbYoutubeDL::Runner.new(default_test_url, { some_key: 'some value' })
       r.options.configure do |c|
         c.another_key = 'another_value'
       end

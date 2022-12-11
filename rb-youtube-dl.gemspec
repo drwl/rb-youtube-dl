@@ -5,7 +5,7 @@ require 'youtube-dl/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'rb-youtube-dl'
-  spec.version       = YoutubeDL::VERSION
+  spec.version       = RbYoutubeDL::VERSION
   spec.authors       = ['drwl', 'sapslaj', 'xNightMare']
   spec.email         = ['git@drewlee.com']
   spec.summary       = <<~SUMMARY.strip

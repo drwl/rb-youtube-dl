@@ -1,4 +1,4 @@
-module YoutubeDL
+module RbYoutubeDL
   # Some support methods and glue logic.
   module Support
     # Returns a usable youtube-dl executable (system or vendor)

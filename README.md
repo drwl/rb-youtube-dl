@@ -48,7 +48,7 @@ Some features of youtube-dl require ffmpeg or avconf to be installed.  Normally 
 Pretty simple.
 
 ```ruby
-YoutubeDL.download "https://www.youtube.com/watch?v=gvdf5n-zI14", output: 'some_file.mp4'
+RbYoutubeDL.download "https://www.youtube.com/watch?v=gvdf5n-zI14", output: 'some_file.mp4'
 ```
 
 All options available to youtube-dl can be passed to the options hash
@@ -62,7 +62,7 @@ options = {
   continue: false
 }
 
-YoutubeDL.download "https://www.youtube.com/watch?v=gvdf5n-zI14", options
+RbYoutubeDL.download "https://www.youtube.com/watch?v=gvdf5n-zI14", options
 ```
 
 Options passed as `options = {option: true}` or `options = {option: false}` are passed to youtube-dl as `--option` or `--no-option`
