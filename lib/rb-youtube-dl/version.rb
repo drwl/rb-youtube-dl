@@ -6,5 +6,5 @@
 module RbYoutubeDL
   # Semantic Version as well as the bundled binary version.
   # "(major).(minor).(teeny).(pre-release).(binary-version)"
-  VERSION = '0.4.0.2021.12.17'.freeze
+  VERSION = '0.4.1.2021.12.17'.freeze
 end
