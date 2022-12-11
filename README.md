@@ -18,7 +18,7 @@ Or install it yourself as:
 
     $ gem install rb-youtube-dl
 
-## Install rb-youtube-dl
+## Install youtube-dl
 This gem ships with the latest (working) version of youtube-dl built-in, so you don't have to install youtube-dl at all! Unless you want to.
 
 Refer to the gem version patch and revision to see what version of youtube-dl is being bundled.
