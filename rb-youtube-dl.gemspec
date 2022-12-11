@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
     Ruby wrapper for youtube-dl, forked from youtube-dl.rb
   SUMMARY
   spec.description   = <<~DESCRIPTION.strip
-    in the spirit of pygments.rb and MiniMagick, youtube-dl.rb is a command line wrapper for the python script youtube-dl
+    Rb-YoutubeDL is a wrapper for the python script youtube-dl. Forked from youtube-dl.rb gem.
   DESCRIPTION
   spec.homepage      = 'https://github.com/drwl/rb-youtube-dl'
   spec.license       = 'MIT'
