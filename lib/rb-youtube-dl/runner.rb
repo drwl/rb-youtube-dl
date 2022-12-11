@@ -1,12 +1,12 @@
-module YoutubeDL
+module RbYoutubeDL
   # Utility class for running and managing youtube-dl
   class Runner
-    include YoutubeDL::Support
+    include RbYoutubeDL::Support
 
     # @return [String] URL to download
     attr_accessor :url
 
-    # @return [YoutubeDL::Options] Options access.
+    # @return [RbYoutubeDL::Options] Options access.
     attr_accessor :options
 
     # @return [String] Executable path
@@ -21,7 +21,7 @@ module YoutubeDL
     # @param options [Hash, Options] options to pass to the executable. Automatically converted to Options if it isn't already
     def initialize(url, options = {})
       @url = url
-      @options = YoutubeDL::Options.new(options)
+      @options = RbYoutubeDL::Options.new(options)
       @executable = 'youtube-dl'
     end
 

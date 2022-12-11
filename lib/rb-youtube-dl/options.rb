@@ -1,4 +1,4 @@
-module YoutubeDL
+module RbYoutubeDL
   # Option and configuration getting, setting, and storage, and all that
   class Options
     # @return [Hash] key value storage object
@@ -85,7 +85,7 @@ module YoutubeDL
     # new instance of Options.
     #
     # @param hash [Hash] Hash to merge options with
-    # @return [YoutubeDL::Options] Merged Options instance
+    # @return [RbYoutubeDL::Options] Merged Options instance
     def with(hash)
       merged = Options.new(@store.merge(hash.to_h))
       merged.banned_keys = @banned_keys
@@ -140,7 +140,7 @@ module YoutubeDL
 
     # Symbolizes and sanitizes keys and returns a copy of self
     #
-    # @return [YoutubeDL::Options] Options with sanitized keys.
+    # @return [RbYoutubeDL::Options] Options with sanitized keys.
     def sanitize_keys
       safe_copy = dup
       safe_copy.sanitize_keys!

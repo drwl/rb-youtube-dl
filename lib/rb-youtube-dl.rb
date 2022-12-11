@@ -2,14 +2,14 @@ require 'terrapin'
 require 'json'
 require 'ostruct'
 
-require 'youtube-dl/version'
-require 'youtube-dl/support'
-require 'youtube-dl/options'
-require 'youtube-dl/runner'
-require 'youtube-dl/video'
+require 'rb-youtube-dl/version'
+require 'rb-youtube-dl/support'
+require 'rb-youtube-dl/options'
+require 'rb-youtube-dl/runner'
+require 'rb-youtube-dl/video'
 
-# Global YoutubeDL module. Contains some convenience methods and all of the business classes.
-module YoutubeDL
+# Global RbYoutubeDL module. Contains some convenience methods and all of the business classes.
+module RbYoutubeDL
   extend self
   extend Support
 
@@ -17,12 +17,12 @@ module YoutubeDL
   #
   # @param urls [String, Array] URLs to download
   # @param options [Hash] Downloader options
-  # @return [YoutubeDL::Video, Array] Video model or array of Video models
+  # @return [RbYoutubeDL::Video, Array] Video model or array of Video models
   def download(urls, options = {})
     if urls.is_a? Array
-      urls.map { |url| YoutubeDL::Video.get(url, options) }
+      urls.map { |url| RbYoutubeDL::Video.get(url, options) }
     else
-      YoutubeDL::Video.get(urls, options) # Urls should be singular but oh well. url = urls. There. Go cry in a corner.
+      RbYoutubeDL::Video.get(urls, options) # Urls should be singular but oh well. url = urls. There. Go cry in a corner.
     end
   end
 

@@ -1,6 +1,6 @@
-RSpec.describe YoutubeDL do
+RSpec.describe RbYoutubeDL do
   describe '::VERSION' do
-    let(:version) { YoutubeDL::VERSION }
+    let(:version) { RbYoutubeDL::VERSION }
 
     it 'is a valid Rubygem version' do
       # "Malformed version number string #{version}"
@@ -23,22 +23,22 @@ RSpec.describe YoutubeDL do
     end
 
     it 'should download videos without options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
-      YoutubeDL.download default_test_url
+      RbYoutubeDL.download default_test_url
       expect(Dir.glob(default_test_glob).length).to eq(1)
     end
 
     it 'should download videos with options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
-      YoutubeDL.download default_test_url, output: default_test_filename, format: default_test_format
+      RbYoutubeDL.download default_test_url, output: default_test_filename, format: default_test_format
       expect(File.exist?(default_test_filename)).to be_truthy
     end
 
     it 'should download multiple videos without options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
-      YoutubeDL.download [default_test_url, default_test_url2]
+      RbYoutubeDL.download [default_test_url, default_test_url2]
       expect(Dir.glob(default_test_glob).length).to eq(2)
     end
 
     it 'should download multiple videos with options', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
-      YoutubeDL.download [default_test_url, default_test_url2], output: 'test_%(title)s-%(id)s.%(ext)s'
+      RbYoutubeDL.download [default_test_url, default_test_url2], output: 'test_%(title)s-%(id)s.%(ext)s'
       expect(Dir.glob('test_' + default_test_glob).length).to eq(2)
     end
   end
@@ -53,14 +53,14 @@ RSpec.describe YoutubeDL do
     end
 
     it 'should download videos, exactly like .download', exceptions_to_retry: [Terrapin::ExitStatusError], retry: 2 do
-      YoutubeDL.get default_test_url
+      RbYoutubeDL.get default_test_url
       expect(Dir.glob(default_test_glob).length).to eq(1)
     end
   end
 
   describe '.extractors' do
     before do
-      @extractors = YoutubeDL.extractors
+      @extractors = RbYoutubeDL.extractors
     end
 
     it 'should return an Array' do
@@ -75,7 +75,7 @@ RSpec.describe YoutubeDL do
 
   describe '.binary_version' do
     before do
-      @version = YoutubeDL.binary_version
+      @version = RbYoutubeDL.binary_version
     end
 
     it 'should return a string' do
@@ -90,7 +90,7 @@ RSpec.describe YoutubeDL do
 
   describe '.user_agent' do
     before do
-      @user_agent = YoutubeDL.user_agent
+      @user_agent = RbYoutubeDL.user_agent
     end
 
     it 'should return a string' do

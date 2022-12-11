@@ -2,7 +2,7 @@ require 'fileutils'
 require 'bundler/setup'
 require 'rake'
 
-require 'youtube-dl'
+require 'rb-youtube-dl'
 
 Dir[File.expand_path('support/**/*.rb', __dir__)].sort.each { |f| require_relative f }
 

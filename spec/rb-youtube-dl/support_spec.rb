@@ -1,8 +1,8 @@
 require 'tmpdir'
 
-RSpec.describe YoutubeDL::Support do
+RSpec.describe RbYoutubeDL::Support do
   TestKlass = Class.new do
-    include YoutubeDL::Support
+    include RbYoutubeDL::Support
 
     def executable_path
       usable_executable_path_for 'youtube-dl'
