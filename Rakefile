@@ -36,7 +36,7 @@ namespace :binaries do
     _, data = File.read(__FILE__).split(/^__END__$/, 2)
 
     version = `./vendor/bin/youtube-dl --version`.strip
-    version_filename = './lib/youtube-dl/version.rb'
+    version_filename = './lib/rb-youtube-dl/version.rb'
 
     # Compiled template file
     version_file = ERB.new(data).result(binding)
@@ -64,7 +64,7 @@ end
 __END__
 # Version file
 # If you are updating this code, make sure you are updating
-# lib/youtube-dl/version.rb as well as the Rakefile.
+# lib/rb-youtube-dl/version.rb as well as the Rakefile.
 
 module RbYoutubeDL
   # Semantic Version as well as the bundled binary version.

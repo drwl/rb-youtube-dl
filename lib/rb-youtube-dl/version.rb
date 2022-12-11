@@ -1,7 +1,7 @@
 
 # Version file
 # If you are updating this code, make sure you are updating
-# lib/youtube-dl/version.rb as well as the Rakefile.
+# lib/rb-youtube-dl/version.rb as well as the Rakefile.
 
 module RbYoutubeDL
   # Semantic Version as well as the bundled binary version.

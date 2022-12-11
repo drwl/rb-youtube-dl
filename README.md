@@ -27,7 +27,7 @@ gem 'activesupport', '< 5.0'
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'youtube-dl.rb'
+gem 'rb-youtube-dl.rb'
 ```
 
 And then execute:

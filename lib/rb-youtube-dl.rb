@@ -2,11 +2,11 @@ require 'terrapin'
 require 'json'
 require 'ostruct'
 
-require 'youtube-dl/version'
-require 'youtube-dl/support'
-require 'youtube-dl/options'
-require 'youtube-dl/runner'
-require 'youtube-dl/video'
+require 'rb-youtube-dl/version'
+require 'rb-youtube-dl/support'
+require 'rb-youtube-dl/options'
+require 'rb-youtube-dl/runner'
+require 'rb-youtube-dl/video'
 
 # Global RbYoutubeDL module. Contains some convenience methods and all of the business classes.
 module RbYoutubeDL

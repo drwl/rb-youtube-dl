@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in youtube-dl.rb.gemspec
+# Specify your gem's dependencies in rb-youtube-dl.rb.gemspec
 gemspec
 
 group :extras do
